@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function MainMenu() {
-  return <div></div>;
+  return (
+    <div className="Menu">
+      <button>Start Quiz</button>
+    </div>
+  );
 }
