@@ -3,16 +3,18 @@ import { Questions } from "../helpers/QuestionBank";
 import { QuizContext } from "../helpers/Contexts";
 
 function Quiz() {
-  const [score, setScore] = useContext(QuizContext);
+  const { score, setScore } = useContext(QuizContext);
+
   const [currQuestion, setCurrQuestion] = useState(0);
   const [optionChosen, setOptionChosen] = useState("");
 
   const nextQuestion = () => {
-    if (Questions[currQuestion].answer === optionChosen) {
+    if (Questions[currQuestion].answer == optionChosen) {
       setScore(score + 1);
     }
     setCurrQuestion(currQuestion + 1);
   };
+  const finishQuiz = () => {};
 
   return (
     <div className="Quiz">
@@ -31,9 +33,12 @@ function Quiz() {
           {Questions[currQuestion].optionD}
         </button>
       </div>
-      <div>
+
+      {currQuestion == Questions.length - 1 ? (
+        <button onClick={finishQuiz}>Finish Quiz</button>
+      ) : (
         <button onClick={nextQuestion}>Next Question</button>
-      </div>
+      )}
     </div>
   );
 }
