@@ -3,7 +3,7 @@ import { Questions } from "../helpers/QuestionBank";
 import { QuizContext } from "../helpers/Contexts";
 
 function Quiz() {
-  const { score, setScore } = useContext(QuizContext);
+  const { score, setScore, setGameState } = useContext(QuizContext);
 
   const [currQuestion, setCurrQuestion] = useState(0);
   const [optionChosen, setOptionChosen] = useState("");
@@ -14,7 +14,12 @@ function Quiz() {
     }
     setCurrQuestion(currQuestion + 1);
   };
-  const finishQuiz = () => {};
+  const finishQuiz = () => {
+    if (Questions[currQuestion].answer == optionChosen) {
+      setScore(score + 1);
+    }
+    setGameState("endScreen");
+  };
 
   return (
     <div className="Quiz">
